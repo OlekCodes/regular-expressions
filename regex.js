@@ -86,16 +86,16 @@ function searchAndLog(r, s) {
 QUANTIFIERS
 How many characters do we search.
 
-{n} 
+{n}
 ?(zero or one)
-+(one or more) 
++(one or more)
 *(zero or more)
 
 goals:
 1. search for occurences of substrings: 'abb'
 2. search for occurences of substrings: 'abb' or 'abbb' or 'abbbb'
-3. search for occurences of substrings: 'a' or 'ab' 
-4. search for occurences of any substring that has 'a' and minimum one 'b' after it 
+3. search for occurences of substrings: 'a' or 'ab'
+4. search for occurences of any substring that has 'a' and minimum one 'b' after it
 5. search for occurences of any substring that has 'a' and zero or more 'b' after it
 
 */
@@ -111,3 +111,119 @@ goals:
 // let r = /ab\?/
 
 // searchAndLog(r, s);
+
+
+/*
+
+CHARACTER SETS
+characters inside square brackets [] - search for one character from all provided
+
+[abc] -> means search for a or b or c
+a|b|c -> the same effect with alternation operator
+
+Difference:
+With square brackets [abc] we can search for only single characters
+In order to search for word javascript or python we need to use alternation operator: javascript|python
+
+Ranges
+two characters with dash between them
+[0-9] one of 0,1,2,3,4,5,6,7,8,9
+[a-z] one of a,b,c,...,z -> from ASCII table (so there will be no any polish or chinese characters)
+[A-Z] one of A,B,C,...,Z -> from ASCII table
+
+Negation
+We can negate anything that we put into square bracket using ^ symbol
+[^abc] search for any character but not a or b or c
+
+
+CHARACTER CLASSES
+Short way to match one of several characters.
+.  = any character except newline
+\d = [0-9],
+\w = [a-zA-Z0-9_],
+\s = [ \t\n\r\f\v]
+
+Inversed
+\D = [^0-9]
+\W = [^a-zA-Z0-9_]
+\S = [^ \t\n\r\f\v]
+
+*/
+
+/*
+
+goals:
+1. search for all occurences of letter a, b, c
+2. search for all occurences of word 'script' or 'Script'
+3. search for all occurences of word 'javascript' or 'JavaScript' or 'Javascript' or 'javaScript'
+4. search for all numbers and underscores in string
+5. search for substrings that are minimum 2 characters long and consist of letters
+
+goals:
+1. search for any characters but not whitespaces and not digits
+2. given string 'This is <inside> and this is outside' search for everything that is between < and > with these signs included
+3. given template with placeholders = 'My name is <name>. I am <age> years old.' search for all placeholders
+
+*/
+
+
+// searchAndLog(/a|b|c/g, 'this is a  12 3 _string_ c++');
+// searchAndLog(/[abc]/g, 'this is a  12 3 _string_ c++');
+
+// searchAndLog(/[sS]cript/g, 'this is a script and Script 12 3 _string_');
+
+// searchAndLog(/javascript|JavaScript|Javascript|javaScript/g, '/javascript| lorem JavaScript| and so on Javascript| and some 123 javaScript/');
+// searchAndLog(/[jJ]ava[sS]cript/g, '/javascript| lorem JavaScript| and so on Javascript| and some 123 javaScript/');
+
+// searchAndLog(/[0-9]+|_/g, 'this is a  12 3 _string_');
+
+// searchAndLog(/[a-zA-Z]{2,}/g, 'this is a  12 3 _string_');
+
+
+// searchAndLog(/[^\s\d]/g, 'thi2s 6 is a 1string');
+
+// searchAndLog(/<.*>/g, 'This is <inside> and this is outside');
+
+// searchAndLog(/<.+?>/g, 'My name is <name>. I am <age> years old.');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+LAZY and GREEDY QUANTIFIERS
+
+if we have quantifier and do nothing with it: <[^\n]+> then
+
+1. walkthrough until match '<' then search for [^\n]+
+'My name is <name>. I am <age> years old.'
+
+this is greedy
+
+let's take a look at lazy mode. in order to do so we need to put question mark after our quantifier <[^\n]+?>
+
+1. walkthrough until match '<' then search for [^\n]+
+'My name is <name>. I am <age> years old.'
+
+this is lazy
+
+*/
+
+
+
