@@ -187,43 +187,20 @@ goals:
 // searchAndLog(/<.+?>/g, 'My name is <name>. I am <age> years old.');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 
-LAZY and GREEDY QUANTIFIERS
+GREEDY AND LAZY QUANTIFIERS
 
-if we have quantifier and do nothing with it: <[^\n]+> then
-
-1. walkthrough until match '<' then search for [^\n]+
-'My name is <name>. I am <age> years old.'
-
-this is greedy
-
-let's take a look at lazy mode. in order to do so we need to put question mark after our quantifier <[^\n]+?>
-
-1. walkthrough until match '<' then search for [^\n]+
-'My name is <name>. I am <age> years old.'
-
-this is lazy
+GREEDY - search for the last possible match
+LAZY - search for the first possible match
 
 */
+
+
+// searchAndLog(/<.+>/g, 'My name is <name>. I am <age> years old.');
+
+
+// searchAndLog(/<.+?>/g, 'My name is <name>. I am <age> years old.');
 
 
 
